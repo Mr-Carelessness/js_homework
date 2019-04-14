@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+    <style type="text/css">
+        tr {
+            line-height: 14px;
+        }
+        td {
+            width: 12px;
+            font-size: 10px;
+            text-align: center;
+        }
+        .red{
+            color: crimson;
+            font-weight: 900;
+        }
+        .green{
+            color: darkgreen;
+            background-color: palegreen;
+            font-weight: 900;
+        }
+        .blue{
+            color: darkblue;
+            font-weight: 900;
+        }
+        .grey{
+            color: dimgrey;
+            background-color: beige;
+        }
+    </style>
+    <script src="code/chapter/07_elife.js"></script>
+    <script src="code/animateworld.js"></script>   
+</head>
+
+<body>
+    <script>
+        //animateWorld是一个匿名函数，通过头文件名进行调用，valley是在07_elife的数组，是全局变量
+        animateWorld(valley);
+    </script>
+</body>
+</html>
