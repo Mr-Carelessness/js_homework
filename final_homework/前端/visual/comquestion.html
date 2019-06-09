@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Home</title>
+		<link href="assets/css/bootstrap.css" rel="stylesheet" />
+		<link href="assets/css/font-awesome.css" rel="stylesheet" />
+		<link href="assets/css/custom-styles.css" rel="stylesheet" />
+		<style type="text/css">
+			#graph1,
+			#graph2,
+			#graph3 {
+				padding-top: 20px;
+				width: 100%;
+				height: 400px;
+				margin: 10px;
+				display: inline-block;
+			}
+			
+			#graph4 {
+				padding-top: 20px;
+				width: 100%;
+				height: 400px;
+				margin: 10px;
+				display: inline-block;
+			}
+			
+			.my_li_class {
+				list-style: none;
+				font-size: 16px;
+				margin: 3px;
+			}
+			
+			.my_li_class:hover {
+				color: #008ACD;
+				font-weight: 700;
+				animation: ease-in 1s;
+			}
+			
+			.question_panel {
+				padding: 10px;
+				background: rgb(249, 249, 249);
+				margin-top: 33px;
+			}
+			
+			.question {
+				font-weight: 900;
+				font-size: 1.15em;
+				margin-left: 10px;
+				color: rgb(0, 138, 205);
+				line-height: 25px;
+			}
+			
+			.answer_panel {
+				padding: 10px;
+				background: white;
+			}
+			
+			.answer {
+				font-size: 1.15em;
+				margin-left: 5px;
+				line-height: 25px;
+			}
+			/*#aaa [class*="col-"]{
+				margin-bottom: -90px;
+			    padding-bottom: 90px;
+			}*/
+			
+			@media only screen and (max-width: 800px) {
+				#page-wrapper .page-header {
+					margin-top: 40px;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrapper">
+			<nav class="navbar navbar-default top-navbar" role="navigation">
+	            <div class="navbar-header">
+	                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+	                    <span class="sr-only">切换导航</span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                </button>
+	                <a class="navbar-brand" href="index.html"><i class="fa fa-gear"></i> <strong>智能小吴后台系统</strong></a>
+	            </div>
+	
+	            <ul class="nav navbar-top-links navbar-right">
+	                <li class="dropdown">
+	                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+	                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+	                    </a>
+	                    
+	                    <ul class="dropdown-menu dropdown-alerts">
+	                        <li>
+	                            <a href="#">
+	                                <div>
+	                                    <i class="fa fa-comment fa-fw"></i> 消息
+	                                </div>
+	                            </a>
+	                        </li>
+	                    </ul>
+	                </li>
+	                <!-- ↑ dropdown 铃铛下拉框 -->
+	                <li class="dropdown">
+	                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+	                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+	                    </a>
+	                    <ul class="dropdown-menu dropdown-user">
+	                        <li><a href="info.html"><i class="fa fa-user fa-fw"></i> 操作者概况</a>
+	                        </li>
+	                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
+	                        </li>
+	                        <li class="divider"></li>
+	                        <li><a href="javascript:void(0);" onclick="localStorage.setItem('account',null); window.location.href = './login.html'"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
+	                        </li>
+	                    </ul>
+	                </li>
+	                <!-- ↑ dropdown-user 人头下拉框 -->
+	            </ul>
+	        </nav>
+	        <!-- ↑ NAV TOP 顶部导航 -->
+	        <nav class="navbar-default navbar-side" role="navigation">
+				<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+	            <div class="sidebar-collapse">
+	                <ul class="nav" id="main-menu">
+	                	<li><a href="#"></a></li>
+	                    <li><a href="index.html"><i class="fa fa-dashboard"></i> 用户数据分析</a></li>
+	                    <li><a href="stdquestions.html"><i class="fa fa-edit"></i> 查看标准问题及答案</a></li>
+	                    <li><a href="dialoghistory.html"><i class="fa fa-users"></i> 查看用户对话记录</a>
+	                    <li><a class="active-menu" href="comquestion.html"><i class="fa fa-question"></i> 常见问题与解答</a></li>
+	                </ul>
+	            </div>
+	        </nav>
+	        <!-- ↑ NAV SIDE 侧边导航 -->
+			<div id="page-wrapper">
+				<div id="page-inner">
+
+					<div class="row">
+						<div class="col-md-12">
+							<h1 class="page-header" style="border-left: rgba(0,0,0,0.37) double 6px; padding-left: 20px;">
+                        	常见问题与解答 <small> <br>管理员在使用后台系统中碰到的常见问题及其解决方案</small>
+                        </h1>
+						</div>
+					</div>
+					<!-- /. ROW  -->
+
+					<div class="row" id="aaa">
+						<div class="col-md-6 col-sm-12" v-for="item in questionlist">
+							<div class="question_panel" style="border-top-right-radius: 6px; border-top-left-radius: 6px">
+								<i class="fa fa-question"></i><span class="question">问题{{item.id}}：{{item.question}}</span>
+							</div>
+							<div class="answer_panel" style="border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;">
+								<i class="fa fa-hand-o-right"></i><span class="answer">回答：<span v-html="item.answer"></span></span>
+							</div>
+						</div>
+					</div>
+
+					<footer>
+						<p>Copyright &copy; 2019.智能小吴开发团队<br/>All rights reserved.</p>
+					</footer>
+				</div>
+				<!-- PAGE INNER 主页面 -->
+	        </div>
+	        <!-- PAGE WRAPPER 整体布局 -->
+	    </div>
+	    <!-- 引用文件  -->
+		<script src="assets/js/vue-2.4.0.js"></script>
+		<script src="assets/js/jquery-1.10.2.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/jquery.metisMenu.js"></script>
+		<script src="assets/js/dataTables/jquery.dataTables.js"></script>
+		<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+		<script src="assets/js/custom-scripts.js"></script>
+		<script>
+			function page_init() {
+				if(localStorage.getItem("account") == null || localStorage.getItem("account") == "null") {
+					alert("您尚未登录系统，请先登录系统再对系统进行操作！")
+					window.location.href = "./login.html";
+				}
+			}
+			page_init();
+
+			//通过vue，实现data数据的绑定
+			var tbapp = new Vue({
+				el: '#page-wrapper',
+				data: {
+					questionlist: []
+				},
+				methods: {
+					getcomquestion: function() {
+						//通过ajax，返回数据库当中的所有问题
+						var _self = this;
+						$.get('http://106.14.139.129:3456/comQuestion/select', function(data, status) {
+							ans = JSON.parse(data);
+							if(ans.code == 0) {
+								console.log(ans)
+								_self.questionlist = ans.data;
+							}
+						});
+					}
+				},
+				mounted: function() {
+					this.getcomquestion();
+				}
+
+			});
+		</script>
+
+		<script>
+		</script>
+
+	</body>
+
+</html>

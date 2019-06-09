@@ -1,0 +1,631 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Home</title>
+		<link href="assets/css/bootstrap.css" rel="stylesheet" />
+		<link href="assets/css/font-awesome.css" rel="stylesheet" />
+		<link href="assets/css/custom-styles.css" rel="stylesheet" />
+		<link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+		<style type="text/css">
+			#graph1,
+			#graph2,
+			#graph3 {
+				padding-top: 20px;
+				width: 100%;
+				height: 400px;
+				margin: 10px;
+				display: inline-block;
+			}
+			
+			#graph4 {
+				padding-top: 20px;
+				width: 100%;
+				height: 400px;
+				margin: 10px;
+				display: inline-block;
+			}
+			
+			.my_li_class {
+				list-style: none;
+				font-size: 15px;
+				margin: 3px;
+				margin-right: 45px;
+			}
+			
+			.my_li_class:hover {
+				color: #008ACD;
+				font-weight: 700;
+				animation: ease-in 1s;
+			}
+			
+			@media only screen and (max-width: 800px) {
+				#page-wrapper .page-header {
+					margin-top: 40px;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrapper">
+			<nav class="navbar navbar-default top-navbar" role="navigation">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">切换导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+					<a class="navbar-brand" href="index.html"><i class="fa fa-gear"></i> <strong>智能小吴后台系统</strong></a>
+				</div>
+
+				<ul class="nav navbar-top-links navbar-right">
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+							<i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-alerts">
+							<li>
+								<a href="#">
+									<div>
+										<i class="fa fa-comment fa-fw"></i> 消息
+									</div>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<!-- ↑ dropdown 铃铛下拉框 -->
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+							<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-user">
+							<li>
+								<a href="info.html"><i class="fa fa-user fa-fw"></i> 操作者概况</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="javascript:void(0);" onclick="localStorage.setItem('account',null); window.location.href = './login.html'"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
+							</li>
+						</ul>
+					</li>
+					<!-- ↑ dropdown-user 人头下拉框 -->
+				</ul>
+			</nav>
+			<!-- ↑ NAV TOP 顶部导航 -->
+			<nav class="navbar-default navbar-side" role="navigation">
+				<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+				<div class="sidebar-collapse">
+					<ul class="nav" id="main-menu">
+						<li>
+							<a href="#"></a>
+						</li>
+						<li>
+							<a class="active-menu" href="index.html"><i class="fa fa-dashboard"></i> 用户数据分析</a>
+						</li>
+						<li>
+							<a href="stdquestions.html"><i class="fa fa-edit"></i> 查看标准问题及答案</a>
+						</li>
+						<li>
+							<a href="dialoghistory.html"><i class="fa fa-users"></i> 查看用户对话记录</a>
+							<li>
+								<a href="comquestion.html"><i class="fa fa-question"></i> 常见问题与解答</a>
+							</li>
+					</ul>
+				</div>
+			</nav>
+			<!-- ↑ NAV SIDE 侧边导航 -->
+			<div id="page-wrapper">
+				<div id="page-inner">
+					<div class="row">
+						<div class="col-md-12">
+							<h1 class="page-header" style="border-left: rgba(0,0,0,0.37) double 6px; padding-left: 20px;">
+                        	用户数据分析 <small> <br>根据用户使用“智能小吴”的实际情况，对用户的数据进行统计分析</small>
+                        </h1>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-4 col-sm-12 col-xs-12">
+							<div class="panel panel-default">
+								<div class="panel-heading" style="color: #008ACD; font-size: 21px;">
+									问题数据统计
+								</div>
+								<div class="panel-body" style="height: 163px;">
+									<div class="list-group">
+										<a href="stdquestions.html" class="list-group-item">
+											<span class="badge" style="font-size: 20px;">208</span>
+											<i class="fa fa-fw fa-comment"></i> 问题库标准问题数
+										</a>
+										<a href="#" class="list-group-item">
+											<span class="badge" style="font-size: 20px;">623</span>
+											<i class="fa fa-fw fa-user"></i> 询问问题总数
+										</a>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="col-md-8 col-sm-12 col-xs-12">
+							<div class="panel panel-default">
+								<div class="panel-heading" style="color: #008ACD;  font-size: 21px;">
+									在所有类型的问答当中，不同类型的问答所占的比例：
+								</div>
+								<div class="panel-body">
+									<div class="table-responsive">
+										<table class="table table-striped table-bordered table-hover">
+											<thead>
+												<tr>
+													<th>编号</th>
+													<th>回答方式</th>
+													<th>总数量</th>
+													<th>比例</th>
+													<th>近三月比例变化情况</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr style="background: white;">
+													<td>1</td>
+													<td>智能问答</td>
+													<td>449</td>
+													<td>72%</td>
+													<td><b style="color: #26C4D0;">70% → 73% → 76%</b></td>
+												</tr>
+												<tr style="background: white;">
+													<td>2</td>
+													<td>人工问答</td>
+													<td>174</td>
+													<td>28%</td>
+													<td><b style="color: #26C4D0;">30% → 27% → 24%</b></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div id="graph1"></div>
+								<div style="margin-bottom: 30px; margin-top: -20px; width: 100%; height: 30px;">
+									<a class="badge" style="display: inline-block; border: none; padding: 8px; font-size: 15px; margin: 10px 30px; float: right;" href="assets/download/询问人数变化趋势.csv" download="data.csv">&nbsp;&nbsp;下载数据&nbsp;&nbsp;</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="panel panel-default">
+								<div id="graph2"></div>
+								<div style="margin-bottom: 30px; margin-top: -20px; width: 100%; height: auto; padding-bottom: 30px;">
+									<ul>
+										<li class="my_li_class" v-for="(item,index) in qtop5">{{rank[index]}}：{{item.question}}</li>
+									</ul>
+									<a class="badge" style="display: inline-block; border: none; padding: 8px; font-size: 15px; margin: 10px 30px; float: right;" href="assets/download/关注度最高top5.csv" download="data.csv">&nbsp;&nbsp;下载数据&nbsp;&nbsp;</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="panel panel-default">
+								<div id="graph3"></div>
+								<div style="margin-bottom: 30px; margin-top: -20px; width: 100%; height: auto; padding-bottom: 30px;">
+									<ul>
+										<li class="my_li_class" v-for="(item,index) in q2top5">{{rank[index]}}：{{item.question1}}⚪ {{item.question2}}</li>
+									</ul>
+									<a class="badge" style="display: inline-block; border: none; padding: 8px; font-size: 15px; margin: 10px 30px; float: right;" href="assets/download/关联性最高top5.csv" download="data.csv">&nbsp;&nbsp;下载数据&nbsp;&nbsp;</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div id="graph4"></div>
+								<div style="margin-bottom: 30px; margin-top: -20px; width: 100%; height: 30px;">
+									<a class="badge" style="display: inline-block; border: none; padding: 8px; font-size: 15px; margin: 10px 30px; float: right;" href="assets/download/问题关键字分布.csv" download="data.csv">&nbsp;&nbsp;下载数据&nbsp;&nbsp;</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<footer>
+						<p>Copyright &copy; 2019.智能小吴开发团队<br/>All rights reserved.</p>
+					</footer>
+				</div>
+				<!-- PAGE INNER 主页面 -->
+			</div>
+			<!-- PAGE WRAPPER 整体布局 -->
+		</div>
+		<!-- 引用文件  -->
+		<script src="assets/js/vue-2.4.0.js"></script>
+		<script src="assets/echarts-2.2.7/src/theme/macarons.js"></script>
+		<script src="assets/echarts-2.2.7/build/dist/echarts.js"></script>
+		<script src="assets/js/jquery-1.10.2.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/jquery.metisMenu.js"></script>
+		<script src="assets/js/custom-scripts.js"></script>
+		<script>
+			function page_init() {
+				if(localStorage.getItem("account") == null || localStorage.getItem("account") == "null") {
+					alert("您尚未登录系统，请先登录系统再对系统进行操作！")
+					window.location.href = "./login.html";
+				}
+			}
+			page_init();
+
+			var app = new Vue({
+				el: '#page-wrapper',
+				data: {
+					currentTime: "",
+					qtop5: [],
+					q2top5: [],
+					rank: ["1st","2nd","3rd","4th","5th"]
+				},
+				methods: {
+					createRandomItemStyle: function() {
+						return {
+							normal: {
+								color: 'rgb(' + [
+									Math.round(Math.random() * 160),
+									Math.round(Math.random() * 160),
+									Math.round(Math.random() * 160)
+								].join(',') + ')'
+							}
+						};
+					}
+				},
+				mounted: function() {
+					var that = this;
+					this.currentTime = new Date();
+					require.config({
+						paths: {
+							echarts: 'assets/echarts-2.2.7/build/dist'
+						}
+					});
+					//获得图表1
+					require(
+						[
+							'echarts',
+							'echarts/chart/line' // 使用折线图就加载line模块，按需加载
+						],
+						function(ec) {
+							// 基于准备好的dom，初始化echarts图表
+							var myChart1 = ec.init(document.getElementById('graph1'), 'macarons');
+							var that2 = that;
+							/*
+							 * 这里面修改的一个是月份数据，另外一个修改的是每个月份当中的具体数据
+							 */
+							var option = {
+								title: {
+									text: '近十二月询问人数变化趋势',
+									x: 'center',
+									//subtext: '纯属虚构',
+									textStyle: {
+										"fontSize": 21,
+										"fontWeight": 700
+									}
+								},
+								tooltip: {
+									trigger: 'axis'
+								}
+							};
+							myChart1.setOption(option);
+							//显示加载条
+							myChart1.showLoading();
+							var xdata=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+								sdata=[0, 0, 0, 0, 0, 0, 0, 0, 0, 55, 45, 60];
+							//通过请求给myChart1加上数据
+							$.post("http://106.14.139.129:3456/chart/use/select", {year:that2.currentTime.getFullYear(), month:that2.currentTime.getMonth()+1}, function(result) {
+								result = JSON.parse(result);
+								//发送删除请求
+								if(result.code == 0) {
+									console.log(result);
+									var yd = that2.currentTime.getMonth()+2;
+									for(var i=0;i<=11;i++){
+										sdata[i] = result.data[0]["rec"+(i+1)];
+										xdata[i] = yd + "月";
+										yd = yd + 1;
+										if(yd > 12)	yd = 1;
+									}
+									sdata.reverse();
+									console.log(sdata)
+								}
+								// 为echarts对象加载数据 
+								myChart1.setOption({
+									xAxis: [{
+										type: 'category',
+										boundaryGap: false,
+										data: xdata,
+										axisLabel: {
+											show: true,
+											textStyle: {
+												fontSize: '14'
+											}
+										}
+									}],
+									calculable: true,
+									yAxis: [{
+										type: 'value',
+										axisLabel: {
+											formatter: '{value}'
+										},
+										axisLabel: {
+											show: true,
+											textStyle: {
+												fontSize: '14'
+											}
+										}
+									}],
+									series: [{
+										name: '人数',
+										type: 'line',
+										data: sdata,
+										symbol: "image://assets/img/机器人头像.png", //图片格式（image开头，后面跟http地址）
+										symbolRotate: 10, //图标旋转角度
+										symbolSize: 12, //图标长度
+										      itemStyle: {        
+											normal: {          
+												lineStyle: {           
+													width: 3.0 // 0.1的线条是非常细的了
+													          
+												}        
+											}      
+										},
+										markPoint: {
+											data: [{
+													type: 'max',
+													name: '最大值'
+												},
+												{
+													type: 'min',
+													name: '最小值'
+												}
+											]
+										},
+										markLine: {
+											data: [{
+												type: 'average',
+												name: '平均值'
+											}]
+										}
+									}]
+								});
+								//获取数据之后，隐藏显示加载条
+								myChart1.hideLoading();
+							});
+							window.addEventListener("resize", function() {
+								myChart1.resize();
+							});
+						}
+					);
+					//获得图表2
+					require(
+						[
+							'echarts',
+							'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+						],
+						function(ec) {
+							// 基于准备好的dom，初始化echarts图表
+							var myChart2 = ec.init(document.getElementById('graph2'), 'macarons');
+							var that2 = that;
+							var option = {
+								tooltip: {
+									show: true
+								},
+								title: {
+									text: '2019-6关注度最高的前五个问题',
+									x: 'center',
+									//subtext: '纯属虚构',
+									textStyle: {
+										"fontSize": 21,
+										"fontWeight": 700
+									}
+								}
+							};
+							myChart2.setOption(option);
+							// 为echarts对象加载数据 
+							$.post("http://106.14.139.129:3456/chart/problem/select", {year:that2.currentTime.getFullYear(), month:that2.currentTime.getMonth()+1}, function(result) {
+								result = JSON.parse(result);
+								var data = [0,0,0,0,0];
+								if(result.code == 0){
+									that2.qtop5 = result.data;
+									for(var i=0;i<result.data.length;i++){
+										data[i] = result.data[i].freq;
+									}
+								}
+								myChart2.setOption({
+									xAxis: [{
+										type: 'category',
+										data: ["1st", "2nd", "3rd", "4th", "5th"],
+										axisLabel: {
+											show: true,
+											textStyle: {
+												"fontWeight": 900
+											}
+										}
+									}],
+									yAxis: [{
+										type: 'value'
+									}],
+									series: [{
+										"name": "数量",
+										"type": "bar",
+										"data": data,
+										"itemStyle": {
+		                                    normal: {
+		                                        color: function(params) {
+		                                            // build a color map as your need.
+		                                            var colorList = [
+		                                              '#B5C334','#27727B','#9BCA63','#60C0DD',
+		                                               '#26C0C0','#C6E579','#F4E001','#F0805A'
+		                                            ];
+		                                            return colorList[params.dataIndex]
+		                                        },
+		                                        label: {
+		                                            show: true,
+		                                            position: 'top',
+		                                            formatter: '{c}'
+		                                        }
+		                                    }
+		                                }
+									}]
+								});
+								window.addEventListener("resize", function() {
+									myChart2.resize();
+								});
+							});
+						}
+					);
+					//获得图表3
+					require(
+						[
+							'echarts',
+							'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+						],
+						function(ec) {
+							// 基于准备好的dom，初始化echarts图表
+							var myChart3 = ec.init(document.getElementById('graph3'), 'macarons');
+							var that2 = that;
+							var option = {
+								tooltip: {
+									show: true
+								},
+								title: {
+									text: '2019-6关联性最高的前五个问题',
+									x: 'center',
+									//subtext: '纯属虚构',
+									textStyle: {
+										"fontSize": 21,
+										"fontWeight": 700
+									}
+								}
+							};
+							myChart3.setOption(option);
+							// 为echarts对象加载数据 
+							$.post("http://106.14.139.129:3456/chart/problem2/select", {year:that2.currentTime.getFullYear(), month:that2.currentTime.getMonth()+1}, function(result) {
+								result = JSON.parse(result);
+								var data = [0,0,0,0,0];
+								if(result.code == 0){
+									that2.q2top5 = result.data;
+									for(var i=0;i<result.data.length;i++){
+										data[i] = result.data[i].freq;
+									}
+								}
+								myChart3.setOption({
+									yAxis: [{
+										type: 'category',
+										data: ["1st", "2nd", "3rd", "4th", "5th"].reverse(),
+										axisLabel: {
+											show: true,
+											textStyle: {
+												"fontWeight": 900
+											}
+										}
+									}],
+									xAxis: [{
+										type: 'value'
+									}],
+									series: [{
+										"name": "关联数量",
+										"type": "bar",
+										"data": data.reverse(),
+										"itemStyle": {
+		                                    normal: {
+		                                        color: function(params) {
+		                                            // build a color map as your need.
+		                                            var colorList = [
+		                                              '#B5C334','#27727B','#9BCA63','#60C0DD',
+		                                               '#26C0C0','#C6E579','#F4E001','#F0805A'
+		                                            ];
+		                                            return colorList[params.dataIndex]
+		                                        },
+		                                        label: {
+		                                            show: true,
+		                                            position: 'right',
+		                                            formatter: '{c}'
+		                                        }
+		                                    }
+		                                }
+									}]
+								});
+								window.addEventListener("resize", function() {
+									myChart3.resize();
+								});
+							});
+						}
+					);
+					//获得图表4
+					require(
+						[
+							'echarts',
+							'echarts/chart/wordCloud' // 使用柱状图就加载bar模块，按需加载
+						],
+						function(ec) {
+							// 基于准备好的dom，初始化echarts图表
+							var myChart4 = ec.init(document.getElementById('graph4'), 'macarons');
+							var that2 = that;
+							var option = {
+								title: {
+									text: '问题关键字分布',
+									x: 'center',
+									textStyle: {
+										"fontSize": 21,
+										"fontWeight": 700
+									}
+								},
+								tooltip: {
+									show: true
+								}
+								
+							};
+							myChart4.setOption(option);
+							// 为echarts对象加载数据 
+							$.post("http://106.14.139.129:3456/chart/word/select", {year:that2.currentTime.getFullYear(), month:that2.currentTime.getMonth()+1}, function(result) {
+								result = JSON.parse(result);
+								//发送删除请求
+								if(result.code == 0) {
+									for(var i=0;i<result.data.length;i++){
+										result.data[i].value = Number.parseInt(result.data[i].value)*100;
+										result.data[i].itemStyle = that2.createRandomItemStyle();
+									}
+								}
+								console.log(result.data)
+								myChart4.setOption({
+									series: [{
+										name: '频数',
+										type: 'wordCloud',
+										size: ['98%', '98%'],
+										textRotation : [0, 45, 90, -45],
+										//textRotation: [0, 90, -90],
+										textPadding: 0,
+										autoSize: {
+											enable: true,
+											minSize: 14
+										},
+										data: result.data
+									}]
+								}); 
+								window.addEventListener("resize", function() {
+									myChart4.resize();
+								});								
+							});
+						}
+					);
+
+				}
+			});
+		</script>
+
+	</body>
+
+</html>

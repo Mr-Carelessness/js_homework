@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Home</title>
+		<!-- Bootstrap Styles-->
+		<link href="assets/css/bootstrap.css" rel="stylesheet" />
+		<!-- FontAwesome Styles-->
+		<link href="assets/css/font-awesome.css" rel="stylesheet" />
+		<!-- Morris Chart Styles
+    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    -->
+		<!-- Custom Styles-->
+		<link href="assets/css/custom-styles.css" rel="stylesheet" />
+		<!-- Google Fonts
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' /> 
+    -->
+		<style type="text/css">
+			#graph1,
+			#graph2,
+			#graph3 {
+				padding-top: 20px;
+				width: 100%;
+				height: 400px;
+				margin: 10px;
+				display: inline-block;
+			}
+			
+			#graph4 {
+				padding-top: 20px;
+				width: 100%;
+				height: 400px;
+				margin: 10px;
+				display: inline-block;
+			}
+			
+			.my_li_class {
+				list-style: none;
+				font-size: 16px;
+				margin: 3px;
+			}
+			
+			.my_li_class:hover {
+				color: #008ACD;
+				font-weight: 700;
+				animation: ease-in 1s;
+			}
+			@media only screen and (max-width: 800px) {
+				#page-wrapper .page-header{
+					margin-top: 40px;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrapper">
+			<nav class="navbar navbar-default top-navbar" role="navigation">
+	            <div class="navbar-header">
+	                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+	                    <span class="sr-only">切换导航</span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                </button>
+	                <a class="navbar-brand" href="index.html"><i class="fa fa-gear"></i> <strong>智能小吴后台系统</strong></a>
+	            </div>
+	
+	            <ul class="nav navbar-top-links navbar-right">
+	                <li class="dropdown">
+	                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+	                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+	                    </a>
+	                    
+	                    <ul class="dropdown-menu dropdown-alerts">
+	                        <li>
+	                            <a href="#">
+	                                <div>
+	                                    <i class="fa fa-comment fa-fw"></i> 消息
+	                                </div>
+	                            </a>
+	                        </li>
+	                    </ul>
+	                </li>
+	                <!-- ↑ dropdown 铃铛下拉框 -->
+	                <li class="dropdown">
+	                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+	                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+	                    </a>
+	                    <ul class="dropdown-menu dropdown-user">
+	                        <li><a href="#"><i class="fa fa-user fa-fw"></i> 操作者概况</a>
+	                        </li>
+	                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
+	                        </li>
+	                        <li class="divider"></li>
+	                        <li><a href="javascript:void(0);" onclick="localStorage.setItem('account',null); window.location.href = './login.html'"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
+	                        </li>
+	                    </ul>
+	                </li>
+	                <!-- ↑ dropdown-user 人头下拉框 -->
+	            </ul>
+	        </nav>
+	        <!-- ↑ NAV TOP 顶部导航 -->
+	        <nav class="navbar-default navbar-side" role="navigation">
+				<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+	            <div class="sidebar-collapse">
+	                <ul class="nav" id="main-menu">
+	                	<li><a href="#"></a></li>
+	                    <li><a href="index.html"><i class="fa fa-dashboard"></i> 用户数据分析</a></li>
+	                    <li><a class="active-menu" href="stdquestions.html"><i class="fa fa-edit"></i> 查看标准问题及答案</a></li>
+	                    <li><a href="dialoghistory.html"><i class="fa fa-users"></i> 查看用户对话记录</a>
+	                    <li><a href="comquestion.html"><i class="fa fa-question"></i> 常见问题与解答</a></li>
+	                </ul>
+	            </div>
+	        </nav>
+	        <!-- ↑ NAV SIDE 侧边导航 -->
+			<div id="page-wrapper">
+				<div id="page-inner">
+
+					<div class="row">
+						<div class="col-md-12">
+							<h1 class="page-header" style="border-left: rgba(0,0,0,0.37) double 6px; padding-left: 20px;">
+                        	标准问题及答案 <small> <br>查看在后台系统中所有的标准问题及其对应答案</small>
+                        </h1>
+						</div>
+					</div>
+					<!-- /. ROW  -->
+
+					<div class="row">
+						<div class="col-md-12">
+							<!-- Advanced Tables -->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									标准问题~答案表
+								</div>
+								<div class="panel-body">
+									<div style="margin-top: -20px; margin-bottom: 10px;">
+										<h4 style="display: inline-block;">操作：</h4>
+										<button class="badge" style="display: inline-block; border: none; padding: 8px; font-size: 15px;">&nbsp;&nbsp;增加&nbsp;&nbsp;</button>
+										<button class="badge" style="display: inline-block; border: none; padding: 8px; font-size: 15px;">&nbsp;&nbsp;删除&nbsp;&nbsp;</button>
+										<a class="badge" style="display: inline-block; border: none; padding: 8px; font-size: 15px;" href="assets/download/标准问题及答案.csv" download="data.csv">&nbsp;&nbsp;下载数据&nbsp;&nbsp;</a>
+									</div>
+									<div class="table-responsive">
+										<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+											<thead>
+												<tr>
+													<th style="width: 2%;"><input type="checkbox" /></th>
+													<th style="width: 7%;">编号</th>
+													<th style="width: 44%;">标准问题</th>
+													<th style="width: 47%;">答案</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="gradeX" v-for="item in stdqa">
+													<!-- :class="{'even':iseven, 'odd':isodd}">-->
+													<th style="width: 2%;"><input type="checkbox" /></th>
+													<td>{{item.questionid}}</td>
+													<td>{{item.question | strfilter}}</td>
+													<td>
+														<a :title="item.answer">{{item.answer | strfilter}}</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+
+								</div>
+							</div>
+							<!--End Advanced Tables -->
+						</div>
+					</div>
+
+					<footer>
+						<p>Copyright &copy; 2019.智能小吴开发团队<br/>All rights reserved.</p>
+					</footer>
+				</div>
+				<!-- /. PAGE INNER  -->
+			</div>
+			<!-- /. PAGE WRAPPER  -->
+		</div>
+		<!-- /. WRAPPER  -->
+		<!-- JS Scripts-->
+		<!-- Vue.js -->
+		<script src="assets/js/vue-2.4.0.js"></script>
+		<!-- jQuery Js -->
+		<script src="assets/js/jquery-1.10.2.js"></script>
+		<!-- Bootstrap Js -->
+		<script src="assets/js/bootstrap.min.js"></script>
+		<!-- Metis Menu Js -->
+		<script src="assets/js/jquery.metisMenu.js"></script>
+		<!-- DATA TABLE SCRIPTS -->
+		<script src="assets/js/dataTables/jquery.dataTables.js"></script>
+		<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+		<!-- Custom Js -->
+		<script src="assets/js/custom-scripts.js"></script>
+		<script>
+			function page_init(){
+				if(localStorage.getItem("account") == null || localStorage.getItem("account") == "null"){
+					alert("您尚未登录系统，请先登录系统再对系统进行操作！")
+					window.location.href = "./login.html";
+				}
+			}
+			//★  page_init();
+			
+			//通过vue，实现data数据的绑定
+			var tbapp = new Vue({
+				el: '#page-wrapper',
+				data: {
+					stdqa: [],
+				},
+				filters: {
+					strfilter: function(str) {
+						if(str.length > 35) {
+							str = str.substr(0, 35) + "......";
+						}
+						return str;
+					}
+				},
+				methods: {
+					getstdqa: function() {
+						//通过ajax，返回数据库当中的所有问题
+						var _self = this;
+						$.get('http://106.14.139.129:3456/stdQA/select', function(data, status) {
+							ans = JSON.parse(data);
+							if(ans.code == 0) {
+								_self.stdqa = ans.data;
+							}
+						})
+					}
+				},
+				beforeCreate: function() {
+
+				},
+				mounted: function() {
+					this.getstdqa();
+
+				},
+				updated: function() {
+					//参考资料：https://www.cnblogs.com/amoniyibeizi/p/4548111.html
+					//$('#datatable-example').dataTable({
+					//
+					//});
+
+					$('#dataTables-example').dataTable({
+						"paging": true, // 开启分页
+						"pageLength": 10, //每页显示数量
+						"lengthChange": true, //是否允许用户改变表格每页显示的记录数
+						"searching": true, //搜索
+						"ordering": true, //排序
+						"info": true, //左下角 从 1 到 5 /共 23 条数据
+						"autoWidth": true,
+						// "scrollX": "100%",//表格的宽度
+						// "scrollY": "200px",//表格的高度
+						"scrollXInner": "100%", //表格的内容宽度
+						// "bScrollCollapse":true,//当显示的数据不足以支撑表格的默认的高度时，依然显示纵向的滚动条。(默认是false) 
+						"aaSorting": [
+							[1, 'asc']
+						],
+						"language": {
+							"sInfoEmpty": "没有数据",
+							"sZeroRecords": "没有查找到满足条件的数据",
+							"sInfo": "[第 _START_ 页] 到 [第 _END_ 页]， 共 _TOTAL_ 条数据",
+							"sLengthMenu": "每页显示记录条数： _MENU_ ",
+							"sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+							"sSearch": "搜索：",
+							"oPaginate": {
+								"sFirst": "首页",
+								"sPrevious": "前一页",
+								"sNext": "后一页",
+								"sLast": "尾页"
+							}
+						},
+
+					});
+					document.getElementById('dataTables-example_filter').style = "float: right";
+					document.getElementById('dataTables-example_paginate').style = "float: right";
+				},
+				watch: {
+
+				}
+			});
+		</script>
+
+		<script>
+		</script>
+
+	</body>
+
+</html>

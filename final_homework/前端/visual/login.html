@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>登录界面</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="assets/css/bootstrap.css" /> 
+		<style>
+			
+			body{
+				margin: auto;
+				width: 100%;
+				height: 100%;
+			}
+			/*#app{ margin-left: auto; margin-right: auto; margin-top: auto; width: 20em; }
+			*/
+		</style>
+	</head>
+
+	<body>
+		<div id="app">
+			<img :src="imgsrc" style="position: absolute; left: 0; top: 0; z-index: -1; width: 100%; height: 100%; opacity: 0.85" />
+			<div class="container">
+				<div class="col-md-4 col-md-offset-4" style="padding: 10px 30px 40px 30px; margin-top: 15%; background: rgba(255,255,255,0.92); border-radius: 10px;">
+					
+					<h3 style="text-align: center; color: rgb(0,138,215); font-weight:900; padding: 10px;">登录界面</h3>
+					<!--用户名输入框-->
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><img src="assets/img/icon_group.png" style="width: 1.2em; height: 1.3em;"/></span>
+						<input id="userName" type="text" class="form-control" placeholder="用户名" aria-describedby="basic-addon1">
+					</div>
+			
+					<br>
+					<!--密码输入框-->
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><img src="assets/img/icon_lock.png" style="width: 1.2em; height: 1.3em;"/></span>
+						<input id="passWord" type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon1">
+					</div>
+					<br>
+					<!--下面是登陆按钮,包括颜色控制-->
+					<button id="login-btn" type="button" style="width:100%; margin-bottom: 20px; background: rgb(0,138,215); border: none; font-weight: 900; color: #fff; font-size:1.15em" class="btn btn-default" @click="login">登 录</button>
+					<a href="mailto:31601365@stu.zucc.edu.cn?subject=邮件标题&body=邮件内容">任何问题可以联系: 31601365@stu.zucc.edu.cn</a>
+				</div>
+			</div>
+			<div class="container">
+				<p style="text-align: center; margin-top: 10%; font-size: 1.2em; color: white; font-weight: 900;">Copyright &copy; 智能小吴开发团队</p>
+			</div>
+		</div>
+		<script src="assets/js/jquery-1.10.2.js"></script>
+    	<script src="assets/js/bootstrap.min.js"></script> 
+    	<script src="assets/js/vue-2.4.0.js"></script>
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					imgsrc: '',
+				},
+				methods: {
+					login: ()=>{
+						//▲事件：通过登录函数到后台找账号和密码，并将登录结果返回给这里，根据结果判断是否跳转
+						var username = $('#userName').val();
+						var passwd = $('#passWord').val();
+						$.post("http://106.14.139.129:3456/user/login",{id:username,passwd:passwd},function(result){
+							//console.log(result)
+							result = JSON.parse(result)
+							if(result.code == 0){
+								if(result.successlogin == 1){
+									localStorage.setItem("account", username);
+									window.location.href = "./index.html";
+								}else{
+									alert("登录失败，请检查账号或者密码是否错误")
+								}
+							}else{
+								alert("登录失败，服务器端异常")	
+							}
+						});
+						//alert(username + "---" + passwd);
+						//if(username == "admin")
+						//	window.location.href = "./index.html"
+					}
+				},
+				mounted: function(){
+					var num = Math.ceil(Math.random()*18);
+					this.imgsrc = "assets/img/bg-"+num+".jpg";
+				}
+			});
+			
+			localStorage.setItem("account","admin")
+			console.log(localStorage.getItem("account"))
+		</script>
+	</body>
+
+</html>

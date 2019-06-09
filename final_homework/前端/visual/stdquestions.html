@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Home</title>
+		<link href="assets/css/bootstrap.css" rel="stylesheet" />
+		<link href="assets/css/font-awesome.css" rel="stylesheet" />
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+		<link href="assets/css/custom-styles.css" rel="stylesheet" />
+
+		<style type="text/css">
+			#graph1,
+			#graph2,
+			#graph3 {
+				padding-top: 20px;
+				width: 100%;
+				height: 400px;
+				margin: 10px;
+				display: inline-block;
+			}
+			
+			#graph4 {
+				padding-top: 20px;
+				width: 100%;
+				height: 400px;
+				margin: 10px;
+				display: inline-block;
+			}
+			
+			.my_li_class {
+				list-style: none;
+				font-size: 16px;
+				margin: 3px;
+			}
+			
+			.my_li_class:hover {
+				color: #008ACD;
+				font-weight: 700;
+				animation: ease-in 1s;
+			}
+			
+			.table-responsive .el-table {
+				border-top: rgba(0, 138, 205, 0.75) solid 2px;
+				border-bottom: rgba(0, 138, 205, 0.75) solid 2px;
+			}
+			
+			.demo-table-expand {
+				font-size: 0;
+			}
+			
+			.demo-table-expand label {
+				width: 90px;
+				height: 10px;
+				color: rgb(0, 138, 205);
+			}
+			
+			.demo-table-expand .el-form-item {
+				margin-right: 0;
+				margin-bottom: 0;
+				font-family: "仿宋";
+				width: 100%;
+			}
+			.el-form-item__label{
+				width: 120px;
+			}
+			.el-form-item__content{
+				margin-left: 120px;
+			}
+			
+			@media only screen and (max-width: 800px) {
+				#page-wrapper .page-header {
+					margin-top: 40px;
+				}
+				.el-form-item__label{
+					text-align: left;
+				}
+				.el-form-item__content{
+					margin-left: 0;
+				}
+				.el-dialog{
+					width: 90%;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrapper">
+			<nav class="navbar navbar-default top-navbar" role="navigation">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+	                    <span class="sr-only">切换导航</span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                </button>
+					<a class="navbar-brand" href="index.html"><i class="fa fa-gear"></i> <strong>智能小吴后台系统</strong></a>
+				</div>
+
+				<ul class="nav navbar-top-links navbar-right">
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+							<i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+						</a>
+
+						<ul class="dropdown-menu dropdown-alerts">
+							<li>
+								<a href="#">
+									<div>
+										<i class="fa fa-comment fa-fw"></i> 消息
+									</div>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<!-- ↑ dropdown 铃铛下拉框 -->
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+							<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-user">
+							<li>
+								<a href="info.html"><i class="fa fa-user fa-fw"></i> 操作者概况</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="javascript:void(0);" onclick="localStorage.setItem('account',null); window.location.href = './login.html'"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
+							</li>
+						</ul>
+					</li>
+					<!-- ↑ dropdown-user 人头下拉框 -->
+				</ul>
+			</nav>
+			<!-- ↑ NAV TOP 顶部导航 -->
+			<nav class="navbar-default navbar-side" role="navigation">
+				<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+				<div class="sidebar-collapse">
+					<ul class="nav" id="main-menu">
+						<li>
+							<a href="#"></a>
+						</li>
+						<li>
+							<a href="index.html"><i class="fa fa-dashboard"></i> 用户数据分析</a>
+						</li>
+						<li>
+							<a class="active-menu" href="stdquestions.html"><i class="fa fa-edit"></i> 查看标准问题及答案</a>
+						</li>
+						<li>
+							<a href="dialoghistory.html"><i class="fa fa-users"></i> 查看用户对话记录</a>
+							<li>
+								<a href="comquestion.html"><i class="fa fa-question"></i> 常见问题与解答</a>
+							</li>
+					</ul>
+				</div>
+			</nav>
+			<!-- ↑ NAV SIDE 侧边导航 -->
+			<div id="page-wrapper">
+				<div id="page-inner">
+
+					<div class="row">
+						<div class="col-md-12">
+							<h1 class="page-header" style="border-left: rgba(0,0,0,0.37) double 6px; padding-left: 20px;">
+                        	标准问题及答案 <small> <br>查看在后台系统中所有的标准问题及其对应答案</small>
+                        </h1>
+						</div>
+					</div>
+					<!-- /. ROW  -->
+
+					<div class="row">
+						<div class="col-md-12">
+							<!-- Advanced Tables -->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									标准问题·答案表
+								</div>
+								<div class="panel-body">
+									<div style="margin-top: -20px; margin-bottom: 10px;">
+										<h4 style="display: inline-block;">操作：</h4>
+										<button class="badge" style="display: inline-block; border: none; padding: 8px; font-size: 15px;" @click="dialogFormVisible = true">&nbsp;&nbsp;增加&nbsp;&nbsp;</button>
+										<button class="badge" style="display: inline-block; border: none; padding: 8px; font-size: 15px;" @click="deleteSelected">&nbsp;&nbsp;删除&nbsp;&nbsp;</button>
+										<a class="badge" style="display: inline-block; border: none; padding: 8px; font-size: 15px;" href="assets/download/标准问题及答案.csv" download="data.csv">&nbsp;&nbsp;下载数据&nbsp;&nbsp;</a>
+									</div>
+									<div class="table-responsive">
+										<el-table :data="stdqa.slice((currentPage-1)*pagesize,currentPage*pagesize)" ref="chooselist" style="width: 100%;" @selection-change="handleSelectionChange" :header-cell-style="{background:'rgb(249,250,250)'}" @row-click="clickTable">
+											<el-table-column type="selection"></el-table-column>
+											<el-table-column type="expand">
+												<template scope="props">
+													<el-form label-position="left" class="demo-table-expand">
+
+														<el-form-item label="问题编号：">
+															<span>{{ props.row.questionid }}</span>
+														</el-form-item>
+														<el-form-item label="问题：">
+															<span>{{ props.row.question }}</span>
+														</el-form-item>
+														<el-form-item label="答案：">
+															<span>{{ props.row.answer }}</span>
+														</el-form-item>
+													</el-form>
+												</template>
+											</el-table-column>
+
+											<el-table-column prop="questionid" label="问题编号" width="100"></el-table-column>
+											<el-table-column prop="question" label="问题" :show-overflow-tooltip="true"></el-table-column>
+											<el-table-column prop="answer" label="答案" :show-overflow-tooltip="true"></el-table-column>
+										</el-table><br/>
+										<div style="text-align: center; margin-bottom: 20px;">
+											<el-pagination background layout="prev, pager, next, jumper" :total="total" @current-change="currentChange" :page-size="pagesize">
+											</el-pagination>
+										</div>
+									</div>
+
+								</div>
+								<el-dialog title="添加标准问题" :visible.sync="dialogFormVisible">
+									<el-form :model="form">
+										<el-form-item label="问题" :label-width="formLabelWidth">
+											<el-input v-model="form.question" autocomplete="off"></el-input>
+										</el-form-item>
+										<el-form-item label="答案" :label-width="formLabelWidth">
+											<el-input type="textarea" v-model="form.answer" autocomplete="off"></el-input>
+										</el-form-item>
+									</el-form>
+									<div slot="footer" class="dialog-footer">
+										<el-button @click="dialogFormVisible = false">取 消</el-button>
+										<el-button type="primary" @click="addstdqa">确 定</el-button>
+									</div>
+								</el-dialog>
+							</div>
+							<!--End Advanced Tables -->
+						</div>
+					</div>
+
+					<footer>
+						<p>Copyright &copy; 2019.智能小吴开发团队<br/>All rights reserved.</p>
+					</footer>
+				<!-- PAGE INNER 主页面 -->
+	        </div>
+	        <!-- PAGE WRAPPER 整体布局 -->
+	    </div>
+	    <!-- 引用文件  -->
+		<script src="assets/js/vue-2.4.0.js"></script>
+		<script src="assets/js/jquery-1.10.2.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/jquery.metisMenu.js"></script>
+		<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+		<script src="assets/js/custom-scripts.js"></script>
+		<script>
+			const PAGE_ROWS = 30; //表格中每页的数据条数
+			function page_init() {
+				if(localStorage.getItem("account") == null || localStorage.getItem("account") == "null") {
+					alert("您尚未登录系统，请先登录系统再对系统进行操作！")
+					window.location.href = "./login.html";
+				}
+			}
+			page_init();
+
+			//通过vue，实现data数据的绑定
+			var tbapp = new Vue({
+				el: '#wrapper',
+				data: function() {
+					return {
+						stdqa: [],
+						total: 0, //默认数据总数
+						pagesize: PAGE_ROWS, //每页的数据条数
+						currentPage: 1, //默认开始页面
+						dialogFormVisible: false, //添加表单页面
+						form: {
+							question: '',
+							answer: ''
+						},
+						formLabelWidth: '90px'
+					}
+				},
+				filters: {
+					strfilter: function(str) {
+						if(str.length > 35) {
+							str = str.substr(0, 35) + "......";
+						}
+						return str;
+					}
+				},
+				methods: {
+					getstdqa: function() {
+						//通过ajax，返回数据库当中的所有问题
+						var _self = this;
+						$.get('http://106.14.139.129:3456/stdQA/select', function(data, status) {
+							ans = JSON.parse(data);
+							if(ans.code == 0) {
+								_self.stdqa = ans.data;
+								_self.total = ans.recordsTotal;
+								_self.pagesize = PAGE_ROWS;
+							}
+						})
+					},
+					addstdqa: function() {
+						this.dialogFormVisible = false;
+						console.log(this.form);
+						var that = this;
+						//发送添加请求
+						$.post("http://106.14.139.129:3456/stdQA/add", that.form, function(result) {
+							console.log(result);
+							result = JSON.parse(result);
+							//console.log(result.code)
+							if(result.code == 0) {
+								that.$message({
+									type: 'success',
+									message: '新增成功！'
+								});
+								//更新qlist数据	
+								that.getstdqa();
+							} else {
+								that.$message({
+									type: 'info',
+									message: result.msg
+								});
+							}
+						});
+					},
+					currentChange: function(currentPage) {
+						this.currentPage = currentPage;
+					},
+					deleteSelected: function() {
+						var that = this;
+						this.$confirm('是否删除所选中的数据？', '提示', {
+							confirmButtonText: '确定',
+							cancelButtonText: '取消',
+							type: 'warning'
+						}).then(function() {
+							var selc = that.$refs.chooselist.selection;
+							var del = [];
+							for(var i = 0; i < selc.length; i++) {
+								del.push(selc[i].questionid.toString());
+							}
+							console.log(del.toString());
+							//post待改正
+							$.post("http://106.14.139.129:3456/stdQA/delete", {
+								del: del.toString()
+							}, function(result) {
+								console.log(result);
+								result = JSON.parse(result);
+								//发送删除请求
+								if(result.code == 0) {
+									that.$message({
+										type: 'success',
+										message: '删除成功!\n（若当前页面为空的情况，请跳转到其它页码再跳转回来或者直接刷新）'
+									});
+									//更新qlist数据
+									that.getstdqa();
+								} else {
+									that.$message({
+										type: 'info',
+										message: result.msg
+									});
+								}
+							});
+						}).catch(function() {
+							that.$message({
+								type: 'info',
+								message: '已取消删除'
+							});
+						}); /**/
+					},
+					clickTable: function(row, index, e) {
+						this.$refs.refTable.toggleRowExpansion(row);
+					}
+				},
+				beforeCreate: function() {
+
+				},
+				mounted: function() {
+					this.getstdqa();
+				},
+				updated: function() {
+
+				},
+				watch: {
+
+				}
+			});
+		</script>
+
+		<script>
+		</script>
+
+	</body>
+
+</html>
