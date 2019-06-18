@@ -2,17 +2,38 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var multer  = require('multer');
+var fs = require('fs');
 var url = require('url');
 var mysql = require('./mysqlImpl.js');
+var bodyParse = require('body-parser');
+var multiparty = require('multiparty');
+var formidable = require("formidable");
 
 // 创建 application/x-www-form-urlencoded 编码解析
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(multer({ dest: '/tmp/'}).array('image'));
-app.use('/public', express.static('public'));
+//app.use('/public', express.static('public'));
+// 设置图片上传路径
+//var upload = multer({dest: 'avatar/'});
+//var type = upload.single('file');
+
+app.use('/upload',express.static('upload'));
+ 
+// bodyParse 用来解析post数据
+//app.use(bodyParse.urlencoded({extended:false}));
+//app.use(express.static('public'));
+
+//设置跨域访问
+app.all('*', function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    res.header("X-Powered-By", ' 3.2.1')
+    res.header("Content-Type", "application/json;charset=utf-8");
+    next();
+});
+
 // 设置请求函数
-
-
 app.get('/index.htm', function (req, res) {
    res.sendFile( __dirname + "/" + "index.htm" );
 }) 
@@ -68,72 +89,6 @@ app.post('/', function (req, res) {
    res.send('Hello POST');
 })
 
-//  POST 请求
-app.post('/del_t', function (req, res) {
-   res.setHeader("Access-Control-Allow-Origin", "*"); 
-   res.writeHead(200, {'Content-Type': 'text/plain; charset=utf-8'}); 
-   console.log("/del_t POST 请求");
-   res.send('删除也没面');
-}) 
-
-app.post('/process_post', urlencodedParser, function (req, res) {
-	res.setHeader("Access-Control-Allow-Origin", "*"); 
-	res.writeHead(200, {'Content-Type': 'text/plain; charset=utf-8'}); 
-   // 输出 JSON 格式
-   var response = {
-       "first_name":req.body.first_name,
-       "last_name":req.body.last_name
-   };
-   console.log(response);
-   res.end(JSON.stringify(response));
-})
-
-app.get('/process_get', function (req, res) {
- 
-   // 输出 JSON 格式
-   var response = {
-       "first_name":req.query.first_name,
-       "last_name":req.query.last_name
-   };
-   console.log(response);
-   res.end(JSON.stringify(response));
-})
-//  /del_user 页面响应
-app.get('/del_user', function (req, res) {
-   console.log("/del_user 响应 DELETE 请求");
-   res.send('删除页面');
-})
- 
-//  /list_user 页面 GET 请求
-app.get('/list_user', function (req, res) {
-   console.log("/list_user GET 请求");
-   res.send('用户列表页面');
-})
- 
-// 对页面 abcd, abxcd, ab123cd, 等响应 GET 请求
-app.get('/ab*cd', function(req, res) {   
-   console.log("/ab*cd GET 请求");
-   res.send('正则匹配');
-})
- 
-app.post('/file_upload', function (req, res) {
-   console.log(req.files[0]);  // 上传的文件信息
-   var des_file = __dirname + "/" + req.files[0].originalname;
-   fs.readFile( req.files[0].path, function (err, data) {
-        fs.writeFile(des_file, data, function (err) {
-         if( err ){
-              console.log( err );
-         }else{
-               response = {
-                   message:'File uploaded successfully', 
-                   filename:req.files[0].originalname
-              };
-          }
-          console.log( response );
-          res.end( JSON.stringify( response ) );
-       });
-   });
-})
  
 //==============================================================
 /*
@@ -196,6 +151,83 @@ app.post('/user/update/pwd', urlencodedParser, function (req, res) {
 	    res.end();
     });
 })
+
+//上传图片待返回的数据
+var myResult = {
+    code: 0,
+    message:"默认",
+    token:""
+}
+/*
+	操作：文件上传请求处理，upload.array 支持多文件上传，第二个参数是上传文件数目
+	路径：/user/avatar/update
+*/
+app.post('/user/avatar/update', function (req, res) {
+	/*
+	//获取表单的数据 以及post过来的图片
+    var form = new multiparty.Form();
+    form.uploadDir='./upload'   //上传图片保存的地址     目录必须存在
+	/form.on('file',(name,file)=>{
+		fs.rename(oldPath,newPath,(err)=>{
+			if(err){
+				throw err;
+			}
+		})
+	});/
+    form.parse(req, function(err, fields, files) {
+        //获取提交的数据以及图片上传成功返回的图片信息
+        console.log(fields);  //*获取表单的数据
+        console.log(files);  //*图片上传成功返回的信息
+        // 拿到的是 提交的数据 和图片 路径 保存到数据库表中
+		myResult.code = "200";
+        myResult.message="成功";
+        res.send(myResult);
+    });
+	*/
+	var form = new formidable.IncomingForm();
+	form.uploadDir = "avatar"; //存放目录
+	form.encoding = 'utf-8';
+	form.keepExtensions = true;
+	//开始文件上传
+	res.writeHead(200, {'content-type': 'text/plain'});
+	form.parse(req, function(error, fields, files){
+		console.log(fields);
+		console.log(files);
+		var username = fields.username;
+        for(var key in files){
+            var file = files[key];
+            var fName = username;//(new Date()).getTime();
+            switch (file.type){
+                case "image/jpeg":
+                    fName = fName + ".jpg";
+                    break;
+                case "image/png":
+                    fName = fName + ".png";
+                    break;
+                default :
+                    fName = fName + ".png";
+                    break;
+            }
+            console.log(file.size);
+            var uploadDir = "avatar/" + fName;
+			console.log(uploadDir)
+			var post_data = ["http://zuccsecondary.cn/qa/js/"+uploadDir, fields.username];
+			//修改用户头像地址
+			mysql.updateUserImg(mysql.connection(), post_data, function(data){});
+            fs.rename(file.path, uploadDir, function(err) {
+                if (err) {
+                    res.write(err+"\n");
+                    res.end();
+                }
+                //res.write("upload image:<br/>");
+                //res.write("<img src='/imgShow?id=" + fName + "' />");
+            });
+        }
+		res.write(JSON.stringify({code:0,msg:"上传成功"}));
+		res.end();
+    });
+});
+
 
 /*
 	操作：查询所有的标准问题及答案

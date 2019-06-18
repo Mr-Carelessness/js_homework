@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="viewport" content="width=480, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<title>Home</title>
 		<!-- Bootstrap Styles-->
 		<link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -13,6 +13,9 @@
 		<!-- Custom Styles-->
 		<link href="assets/css/custom-styles.css" rel="stylesheet" />
 		<style type="text/css">
+			#wrapper{
+				min-width: 480px;
+			}
 			#graph1,
 			#graph2,
 			#graph3 {
@@ -242,12 +245,26 @@
 	                            </div> 
 								<div class="panel-body">
 									<div style="text-align: center;">
-										<img src="assets/img/admin_face.jpg" width="150px" height="150px" style="border: solid rgb(230,230,230) 1px;"/>
+										<!--img src="assets/img/admin_face.jpg" width="150px" height="150px" style="border: solid rgb(230,230,230) 1px;"/-->
+										<img :src="form.img" id="img3" width="150px" height="150px" style="border: solid rgb(230,230,230) 1px;" />
 									</div>
 									<div style="margin: 10px;">
-										<input type="file" style="display: inline-block;"/>
+										<!--<input type="file" style="display: inline-block;"/>
 										<el-button type="info" @click="" size="small" style="float: right; margin-bottom: 10px;">上传</el-button>
+										-->
+										<div id="imgPreview">
+											<div id="prompt3">
+												<form id="img_form" action="" method="post" enctype="multipart/form-data">
+													<input type="file" id="file" name='image' class="filepath" onchange="changepic(this)" accept="image/jpg,image/jpeg,image/png,image/PNG">
+													<!--当vaule值改变时执行changepic函数，规定上传的文件只能是图片-->
+												</form>
+												<el-button type="info" @click="uploadImg" size="small" style="float: right; margin-bottom: 10px;">上传</el-button>
+											</div>
+										</div>
 									</div>
+									
+
+									
 								</div>
 							</div>
 						</div>
@@ -264,6 +281,7 @@
 	    <!-- 引用文件  -->
 		<script src="assets/js/vue-2.4.0.js"></script>
 		<script src="assets/js/jquery-1.10.2.js"></script>
+		<!--<script src="assets/js/jquery.form.js"></script>-->
 		<script src="assets/js/bootstrap.min.js"></script>
 		<script src="assets/js/jquery.metisMenu.js"></script>
 		<script src="https://unpkg.com/element-ui/lib/index.js"></script>
@@ -276,13 +294,14 @@
 				}
 			}
 			//page_init();
-
+			var f;
+			
 			//通过vue，实现data数据的绑定
 			var tbapp = new Vue({
 				el: '#page-wrapper',
 				data: {
 					id: "",
-					form: {id:"",createtime:"",email:"",qq:"",wx:"",signal:""},
+					form: {id:"",createtime:"",email:"",qq:"",wx:"",signal:"",img:"assets/img/admin_face.jpg"},
 					rawData: {id:"admin",createtime:"2019-05-28 20:13:11", email:"31601365@stu.zucc.edu.cn", qq:"31601365", wx:"31601365", signal:"这个人很懒，没有任何个人留言！"},
 					dialogFormVisible: false,
 					formLabelWidth: '120px',
@@ -369,6 +388,60 @@
 						_self.form.qq = _self.rawData.qq;
 						_self.form.wx = _self.rawData.wx;
 						_self.form.signal = _self.rawData.signal;							
+					},
+					//提交图片信息
+					uploadImg: function() {
+						var _self = this;
+						//console.log(123);return;
+						// 图片更改后异步提交表单上传服务器，返回url
+						console.log("上传图片请求：")
+						var form = $("#img_form");
+						var formData = new FormData();
+						formData.append("username", this.form.id);
+						if(f != null){
+							formData.append("image", f);
+						}
+						console.log(formData.get("username"))
+						$.ajax({
+			                url: "http://106.14.139.129:3456/user/avatar/update",//请求的url地址
+			                type: 'post',//设置请求的http方式，method也可以
+			                data: formData,
+			                async: true,
+			                processData: false,
+			                contentType: false,
+			                success: function (data, textStatus, jqXHR) {//请求成功之后执行的回调函数
+			                   console.log(data);
+			                   console.log(textStatus);
+			                   console.log(jqXHR);
+			                    _self.$message({
+									type: 'success',
+									message: '上传头像成功！'
+								});
+			                },
+			                error: function (jqXHR, textStatus, errorThrown) {//请求失败之后执行的回调函数
+			                    console.log(errorThrown);
+			                    _self.$message({
+									type: 'info',
+									message: '上传头像失败'
+								});
+			                }
+			            });
+			            /*
+						$.post("http://106.14.139.129:3456/user/avatar/update",{id:this.form.id, image:f},function(data){
+					        data = JSON.parse(data);
+					        console.log(data)
+					        if(data.code == 0) {
+						        imgUrl = data.data.url;
+						        _self.$message({
+									type: 'success',
+									message: '提交成功！'
+								});	
+					        } else {
+					      		alert('上传图片出错！');
+					        }
+					    });
+					    */
+						//form.ajaxSubmit(options);
 					}
 				},
 				mounted: function() {
@@ -384,15 +457,32 @@
 							_self.form.email = _self.rawData.email;
 							_self.form.qq = _self.rawData.qq;
 							_self.form.wx = _self.rawData.wx;
-							_self.form.signal = _self.rawData.signal;							
+							_self.form.signal = _self.rawData.signal;	
+							_self.form.img = _self.rawData.img;	
 						}
 					});
 				}
 
 			});
+			
+			//切换图像
+			function changepic() {
+				var reads = new FileReader();
+				f = document.getElementById('file').files[0];
+				reads.readAsDataURL(f);
+				reads.onload = function(e) {
+					document.getElementById('img3').src = this.result;
+					//$("#img3").css("display", "block");
+					$("#img3").css("width", "150px");
+					$("#img3").css("height", "150px");
+					$("#img3").css("border", "solid rgb(230,230,230) 1px");
+				};
+			}
 		</script>
 
 		<script>
+			// 图片上传：  https://www.jb51.net/article/136690.htm
+			// https://www.cnblogs.com/chyingp/p/express-multer-file-upload.html
 		</script>
 
 	</body>

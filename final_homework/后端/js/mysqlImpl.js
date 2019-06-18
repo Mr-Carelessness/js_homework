@@ -81,7 +81,7 @@ module.exports.login = function(conn, postdata, callback){
 */
 var _getUser = function(conn, postdata, callback){
 	conn.connect();
-	var sql = 'select id,createtime,email,qq,wx,user.signal from user where id=?';
+	var sql = 'select id,createtime,email,qq,wx,user.signal,img from user where id=?';
 	conn.query(sql, postdata, function (err, result) {
 		if(err){
 		  console.log('[登录错误] - ',err.message);
@@ -162,6 +162,36 @@ var _updateUserPwd = function(conn, postdata, callback){
 }
 module.exports.updateUserPwd = function(conn, postdata, callback){
 	return _updateUserPwd(conn, postdata, callback);		
+}
+/*
+	数据库修改用户头像操作
+	o输入--连接, 请求数据, 回调函数
+	o输出--操作结果{code,msg,data}
+*/
+var _updateUserImg = function(conn, postdata, callback){
+	conn.connect();
+	console.log(postdata)
+	var sql = 'update user set img=? where id=?';
+	var flag = 0;
+	console.log("数据库修改用户头像操作：")
+	conn.query(sql, postdata, function (err, result) {
+		if(err){
+			console.log('[修改错误] - ',err.message);
+			callback(error());
+		}else{
+			var ans = {code:0, msg:"修改成功"};
+			callback(ans);			  
+		}
+		console.log('---修改结果：---------------------------------------------------');
+		console.log(true);  
+	});
+	function error() {
+        return {code: -1, msg: "数据库出错"};
+    } 
+	conn.end();	
+}
+module.exports.updateUserImg = function(conn, postdata, callback){
+	return _updateUserImg(conn, postdata, callback);		
 }
 
 

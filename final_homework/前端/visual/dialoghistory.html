@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="viewport" content="width=480, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<title>Home</title>
 		<!-- Bootstrap Styles-->
 		<link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -13,6 +13,9 @@
 		<link href="assets/css/custom-styles.css" rel="stylesheet" />
 		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 		<style type="text/css">
+			#wrapper{
+				min-width: 480px;
+			}
 			#graph1,
 			#graph2,
 			#graph3 {
@@ -89,6 +92,9 @@
 				#page-wrapper .page-header{
 					margin-top: 40px;
 				}
+			}
+			.el-table .success-row {
+			    background: #f0f9eb;
 			}
 		</style>
 	</head>
@@ -179,7 +185,7 @@
 										<button class="badge" style="display: inline-block; border: none; padding: 8px; font-size: 15px; margin: auto;" @click="deleteSelected">&nbsp;&nbsp;删除&nbsp;&nbsp;</button>
 									</div>
 									<div class="table-responsive">
-										<el-table :data="qlist.slice((currentPage-1)*pagesize,currentPage*pagesize)" ref="chooselist" style="width: 100%;" @selection-change="handleSelectionChange" :header-cell-style="{background:'rgb(249,250,250)'}">
+										<el-table :data="qlist.slice((currentPage-1)*pagesize,currentPage*pagesize)" ref="chooselist" style="width: 100%;" @selection-change="handleSelectionChange" :header-cell-style="{background:'rgb(249,250,250)'}" :row-class-name="tableRowClassName">
 											<el-table-column type="selection"></el-table-column>
 											<el-table-column type="expand">
 												<template scope="props">
@@ -335,7 +341,13 @@
 			        },
 					clickTable: function(row, index, e) {
 						this.$refs.refTable.toggleRowExpansion(row);
-					}
+					},
+					tableRowClassName: function({row, rowIndex}) {
+				        if (rowIndex%2 == 1) {
+				          return 'success-row';
+				        } 
+				        return '';
+				    }
 				   
 				},
 				beforeCreate: function() {
